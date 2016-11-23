@@ -1,0 +1,3 @@
+---
+java_debian_mirror: 'http://ftp.ru.debian.org/debian/'
+java_package: 'openjdk-8-jre-headless'

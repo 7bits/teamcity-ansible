@@ -1,0 +1,6 @@
+---
+- name: add backports repository
+  apt_repository: repo='deb {{ java_debian_mirror }} jessie-backports main' state=present filename='jessie-backports'
+
+- name: install java
+  apt: name='{{ java_package }}'

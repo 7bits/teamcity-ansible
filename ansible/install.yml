@@ -7,6 +7,6 @@
     - common
     - postgres
     - teamcity-postgres
-#    - java
+    - java
 #    - teamcity
 #    - teamcity-nginx
