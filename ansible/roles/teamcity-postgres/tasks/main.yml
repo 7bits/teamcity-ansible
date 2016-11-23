@@ -1,0 +1,14 @@
+---
+- name: create postgres user
+  postgresql_user:
+    name: '{{ teamcity_db_user }}'
+    password: '{{ teamcity_db_password }}'
+  become: true
+  become_user: postgres
+
+- name: create postgres database
+  postgresql_db:
+    name: '{{ teamcity_db_name }}'
+    owner: '{{ teamcity_db_user }}'
+  become: true
+  become_user: postgres

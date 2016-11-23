@@ -1,15 +1,15 @@
 ---
-#- name: install apt key
-#  apt_key: url=https://www.postgresql.org/media/keys/ACCC4CF8.asc state=present
+- name: install apt key
+  apt_key: url=https://www.postgresql.org/media/keys/ACCC4CF8.asc state=present
 
-#- name: add apt repository
-#  apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main' state=present filename='pgdg'
+- name: add apt repository
+  apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main' state=present filename='pgdg'
 
 - name: install postgres
-  apt: name='postgresql-{{ postgres.version }}'
+  apt: name='postgresql-{{ postgres_version }}'
 
 #- name: install postgres contrib
-#  apt: name='postgresql-contrib-{{ postgres.version }}'
+#  apt: name='postgresql-contrib-{{ postgres_version }}'
 
 - name: start postgres
   service: name=postgresql state=started
