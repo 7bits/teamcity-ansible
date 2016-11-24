@@ -1,0 +1,18 @@
+---
+- name: add backports repository
+  apt_repository: repo='deb {{ nginx_debian_mirror }} jessie-backports main' state=present filename='jessie-backports'
+  when: ansible_os_family == 'Debian'
+
+- name: install nginx
+  apt: name=nginx default_release=jessie-backports state=latest
+  when: ansible_os_family == 'Debian'
+
+- name: install nginx
+  yum: name=nginx state=latest
+  when: ansible_os_family == 'RedHat'
+
+- name: enable nginx
+  service: name=nginx enabled=yes
+
+- name: start nginx
+  service: name=nginx state=started
