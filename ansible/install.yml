@@ -10,4 +10,4 @@
     - java
     - teamcity
     - nginx
-#    - teamcity-nginx
+    - teamcity-nginx
