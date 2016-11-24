@@ -8,5 +8,6 @@
     - postgres
     - teamcity-postgres
     - java
-#    - teamcity
+    - teamcity
+#    - nginx
 #    - teamcity-nginx

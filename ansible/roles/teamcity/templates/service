@@ -1,0 +1,13 @@
+[Unit]
+Description={{ teamcity_service_description }}
+
+[Service]
+Type=forking
+PIDFile={{ teamcity_basedir }}/TeamCity/logs/teamcity.pid
+WorkingDirectory={{ teamcity_basedir }}/TeamCity
+ExecStart={{ teamcity_basedir }}/TeamCity/bin/runAll.sh start
+ExecStop={{ teamcity_basedir }}/TeamCity/bin/runAll.sh stop
+User={{ teamcity_user }}
+
+[Install]
+WantedBy=multi-user.target

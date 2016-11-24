@@ -21,3 +21,9 @@
 - name: configure locales
   locale_gen: name=en_US.UTF-8 state=present
 
+- name: install systemd
+  apt: name=systemd state=present
+
+- name: install systemd-sysv
+  apt: name='systemd-sysv' state=present
+  notify: reboot

@@ -1,0 +1,46 @@
+---
+- name: add user
+  user: name='{{ teamcity_user }}' system=yes
+
+- name: create base dir
+  file: path='{{ teamcity_basedir }}' owner='{{ teamcity_user }}' state=directory
+
+- name: create dir for teamcity version
+  file: path='{{ teamcity_basedir }}/TeamCity-{{ teamcity_version }}' owner='{{ teamcity_user }}' state=directory
+
+- name: download and extract teamcity archive
+  unarchive:
+    src: '{{ teamcity_download_url }}'
+    dest: '{{ teamcity_basedir }}/TeamCity-{{ teamcity_version }}'
+    copy: 'no'
+    extra_opts: [ '--strip-components=1' ]
+    owner: '{{ teamcity_user }}'
+    creates: '{{ teamcity_basedir }}/TeamCity-{{ teamcity_version }}/bin/teamcity-server.sh'
+
+- name: create symlink to version dir
+  file:
+    src: '{{ teamcity_basedir }}/TeamCity-{{ teamcity_version }}'
+    dest: '{{ teamcity_basedir }}/TeamCity'
+    state: 'link'
+    owner: '{{ teamcity_user }}'
+
+- name: create dir for JDBC driver
+  file: path='{{ teamcity_buildserver }}/lib/jdbc' owner='{{ teamcity_user }}' state=directory
+
+- name: download JDBC driver
+  get_url:
+    url: '{{ teamcity_jdbc_download_url }}'
+    dest: '{{ teamcity_buildserver }}/lib/jdbc/{{ teamcity_jdbc_file }}'
+
+- name: create service config
+  template: src=service dest='/etc/systemd/system/{{ teamcity_service_name }}.service'
+  notify: reload systemd
+
+- name: enable service
+  service: name='{{ teamcity_service_name }}' enabled=yes
+
+- name: start service
+  service: name='{{ teamcity_service_name }}' state=started
+
+- name: install git
+  apt: name=git state=present

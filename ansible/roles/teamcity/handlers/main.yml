@@ -1,0 +1,7 @@
+---
+- name: restart service
+  service: name=teamcity state=restarted
+
+- name: reload systemd
+  command: systemctl daemon-reload
+  notify: restart service

@@ -1,0 +1,12 @@
+---
+teamcity_version: '10.0.3'
+teamcity_download_url: 'https://download.jetbrains.com/teamcity/TeamCity-{{ teamcity_version }}.tar.gz'
+teamcity_basedir: '/opt/teamcity'
+teamcity_user: 'teamcity'
+
+teamcity_buildserver: '/home/teamcity/.BuildServer'
+teamcity_jdbc_download_url: 'https://jdbc.postgresql.org/download/postgresql-9.4.1212.jar'
+teamcity_jdbc_file: 'postgresql-9.4.1212.jar'
+
+teamcity_service_name: 'teamcity'
+teamcity_service_description: 'TeamCity server and agent'
