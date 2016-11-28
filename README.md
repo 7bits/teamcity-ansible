@@ -14,7 +14,7 @@ How to use
 2. Edit `hosts` file, enter your server address.
 3. (Optional) Check and edit `roles/*/default/main.yml` files if necessary.
 4. Run `ansible-playbook install.yml`
-5. Open http://<your_server>/ url in a browser and continue TeamCity installation.
+5. Open http://\<your_server\>/ url in a browser and continue TeamCity installation.
     * Choose PostgreSQL as database, define "teamcity" as database name, username and password (can be changed in `roles/teamcity-postgres/defaults/main.yml`).
     * Define TeamCity admin user name and password.
     * etc...
