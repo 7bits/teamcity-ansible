@@ -23,7 +23,9 @@
 
 - name: install systemd
   apt: name=systemd state=present
+  when: ansible_distribution_release == 'jessie'
 
 - name: install systemd-sysv
   apt: name='systemd-sysv' state=present
   notify: reboot
+  when: ansible_distribution_release == 'jessie'

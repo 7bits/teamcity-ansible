@@ -1,4 +1,8 @@
 ---
+- name: copy websocket configuration
+  template: src=websocket.conf dest=/etc/nginx/conf.d/
+  notify: restart nginx
+
 - name: copy nginx configuration
   template: src=config dest=/etc/nginx/sites-available/{{ teamcity_nginx_site_config }}
   notify: restart nginx
