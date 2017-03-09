@@ -2,3 +2,5 @@
 teamcity_db_name: 'teamcity'
 teamcity_db_user: 'teamcity'
 teamcity_db_password: 'teamcity'
+
+postgres_version: '9.4'

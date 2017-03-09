@@ -12,3 +12,10 @@
     owner: '{{ teamcity_db_user }}'
   become: true
   become_user: postgres
+
+- name: set synchronous_commit=off
+  lineinfile:
+    dest: '/etc/postgresql/{{ postgres_version }}/main/postgresql.conf'
+    insertafter: '^#synchronous_commit'
+    line: 'synchronous_commit = off'
+  notify: restart postgres
