@@ -8,11 +8,16 @@
 - name: create dir for teamcity version
   file: path='{{ teamcity_basedir }}/TeamCity-{{ teamcity_version }}' owner='{{ teamcity_user }}' state=directory
 
-- name: download and extract teamcity archive
+- name: download teamcity archive   # curl because get_url with old Python 2.7.6 doesn't supports modern TLS
+  command: 'curl -L {{ teamcity_download_url }} -o {{ teamcity_tmp_archive }}'
+  args:
+    creates: '{{ teamcity_tmp_archive }}'
+
+- name: extract teamcity archive
   unarchive:
-    src: '{{ teamcity_download_url }}'
+    src: '{{ teamcity_tmp_archive }}'
+    remote_src: 'yes'
     dest: '{{ teamcity_basedir }}/TeamCity-{{ teamcity_version }}'
-    copy: 'no'
     extra_opts: [ '--strip-components=1' ]
     validate_certs: no
     owner: '{{ teamcity_user }}'

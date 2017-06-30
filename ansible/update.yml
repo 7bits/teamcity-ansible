@@ -1,0 +1,7 @@
+---
+- name: Update Teamcity
+  hosts: teamcity
+  remote_user: root
+
+  roles:
+    - teamcity
